@@ -1,0 +1,15 @@
+apply plugin: 'application'
+
+group "io.koosha.massrelay.iron"
+
+dependencies {
+    implementation "com.fazecast:jSerialComm:$fazecast_version"
+    implementation "com.beust:jcommander:$jcommander_version"
+
+    implementation project(':aluminum')
+    implementation project(':iron')
+}
+
+application {
+    mainClass = 'io.koosha.massrelay.IronFluorideApplication'
+}

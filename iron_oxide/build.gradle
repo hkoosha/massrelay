@@ -1,0 +1,12 @@
+apply plugin: 'application'
+
+group "io.koosha.massrelay.iron"
+
+dependencies {
+    implementation project(':aluminum')
+    implementation project(':iron')
+}
+
+application {
+    mainClass = 'io.koosha.massrelay.IronOxideApplication'
+}

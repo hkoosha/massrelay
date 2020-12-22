@@ -1,0 +1,16 @@
+======================[all]
+auto reads
+
+======================[beryllium]
+concurrent access to right side from multiple left side. check no two have
+access at the same time.
+grace time after disconnect. (so db job is surely done).
+db, connection per seconds?
+prevent brute force
+
+======================[iron]
+log rotate
+if could not connect on date, do what?
+re-start on 03:00?
+re-start 1 hour after plc connection?
+backoff

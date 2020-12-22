@@ -1,0 +1,23 @@
+logging:
+  level:
+    org.springframework: warn
+    org.springframework.boot.autoconfigure: warn
+    org.hibernate: warn
+    io.koosha.massrelay: trace
+    io.koosha.massrelay.IronOxideApplication: warn
+  pattern:
+    console: '%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-30.30logger{0}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
+
+spring:
+  application:
+    name: Massrelay Iron Oxide Client
+  profiles:
+    active: production
+  jmx:
+    enabled: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
+      - org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration

@@ -1,0 +1,33 @@
+logging:
+  level:
+    com.zaxxer: warn
+    org.springframework: warn
+    org.springframework.boot.autoconfigure: warn
+    org.hibernate: warn
+    io.koosha.massrelay: info
+    io.koosha.massrelay.BerylliumNitrateApplication: warn
+  pattern:
+    console: '%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-30.30logger{0}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
+
+spring:
+  application:
+    name: Massrelay Beryllium Nitrate Server
+  profiles:
+    active: production
+  jmx:
+    enabled: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
+      - org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MariaDBDialect
+  datasource:
+    url: jdbc:mysql://localhost/massrelay
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: milan
+    password: .

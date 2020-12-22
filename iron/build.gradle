@@ -1,0 +1,5 @@
+group "io.koosha.massrelay.iron"
+
+dependencies {
+    implementation project(':aluminum')
+}

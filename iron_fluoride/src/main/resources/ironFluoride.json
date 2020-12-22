@@ -1,0 +1,32 @@
+{
+  "tag": "Iron Fluoride",
+  "right": "127.0.0.1:7504",
+  "left": "N/A",
+  "cron": 1000,
+  "secret": "f:x",
+  "dump": {
+    "left": false,
+    "right": false
+  },
+  "mute": {
+    "dialing": true,
+    "channelEnd": true
+  },
+  "ssl": {
+    "cert": "classpath:massrelay_cert.pem",
+    "p12": "",
+    "pwd": ""
+  },
+  "restartOnSerialFailure": false,
+  "serial": {
+    "path": "",
+    "baudRate": 9600,
+    "parity": "EVEN",
+    "dataBits": 7,
+    "stopBits": 1,
+    "flowControl": [],
+    "enabled": true
+  },
+  "disabledSerial": [
+  ]
+}

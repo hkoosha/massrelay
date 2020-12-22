@@ -1,0 +1,34 @@
+{
+  "tag": "Copper Carbonate",
+  "right": "127.0.0.1:7501",
+  "left": "0.0.0.0:6505",
+  "cron": 1000,
+  "secret": "N/A",
+  "dump": {
+    "left": false,
+    "right": false
+  },
+  "mute": {
+    "dialing": true,
+    "channelEnd": true
+  },
+  "cert": "classpath:massrelay_cert.pem",
+  "ssl": {
+    "cert": "",
+    "p12": "",
+    "pwd": ""
+  },
+  "gui": {
+    "enabled": true,
+    "title": "Massrelay"
+  },
+  "defaultCom": {
+    "baudRate": 9600,
+    "flowControl": [
+    ],
+    "parity": "EVEN",
+    "dataBits": 7,
+    "stopBits": "1",
+    "enabled": true
+  }
+}

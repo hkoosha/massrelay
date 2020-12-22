@@ -1,0 +1,6 @@
+group "io.koosha.massrelay.aluminum"
+
+dependencies {
+    compileOnly "com.fazecast:jSerialComm:$fazecast_version"
+    compileOnly "org.springframework.boot:spring-boot-starter-data-jpa:$spring_version"
+}

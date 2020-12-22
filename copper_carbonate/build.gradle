@@ -1,0 +1,13 @@
+apply plugin: 'application'
+
+group "io.koosha.massrelay.copper"
+
+dependencies {
+    implementation "com.fazecast:jSerialComm:$fazecast_version"
+
+    implementation project(':aluminum')
+}
+
+application {
+    mainClass = 'io.koosha.massrelay.CopperCarbonateApplication'
+}

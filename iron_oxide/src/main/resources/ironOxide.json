@@ -1,0 +1,26 @@
+{
+  "tag": "Iron Oxide",
+  "right": "127.0.0.1:7504",
+  "left": "N/A",
+  "cron": 1000,
+  "secret": "ring:user",
+  "dump": {
+    "left": false,
+    "right": false
+  },
+  "mute": {
+    "dialing": true,
+    "channelEnd": true
+  },
+  "ssl": {
+    "cert": "",
+    "p12": "",
+    "pwd": ""
+  },
+  "ssl_sample": {
+    "cert": "classpath:massrelay_cert.pem",
+    "p12": "",
+    "pwd": ""
+  },
+  "restartOnSerialFailure": false
+}

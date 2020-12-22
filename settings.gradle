@@ -1,0 +1,12 @@
+rootProject.name = 'massrelay'
+
+include 'aluminum'
+
+include 'beryllium_nitrate'
+
+include 'copper_carbonate'
+
+include 'iron'
+include 'iron_fluoride'
+include 'iron_oxide'
+

@@ -1,0 +1,25 @@
+{
+  "tag": "Beryllium Nitrate",
+  "right": "0.0.0.0:7504",
+  "left": "0.0.0.0:7501",
+  "cron": 1000,
+  "secret": "N/A",
+  "dump": {
+    "left": false,
+    "right": false
+  },
+  "mute": {
+    "dialing": true,
+    "channelEnd": true
+  },
+  "ssl": {
+    "cert": "",
+    "p12": "",
+    "pwd": ""
+  },
+  "ssl_sample": {
+    "cert": "classpath:massrelay_cert.pem",
+    "p12": "classpath:p12.keystore.b64",
+    "pwd": "000000"
+  }
+}
