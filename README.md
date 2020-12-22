@@ -106,6 +106,7 @@ I know these are a lot of steps but many of them are needed only once, such as c
 - fazecast's jserialcomm for serial port.
 - Konfigurations (https://github.com/hkoosha/konfigurations)
 - JavaFx, unfortunately.
+- Web UI for Beryllium Nitrate
 
 ### ROADMAP
 
