@@ -37,27 +37,33 @@ There are 4 applications included in this project (named somewhat randomly!)
             +--------------+  |  +----------------+
                            |  |  |
         +------------------v--v--v---------------+
+        |    NAT, Firewall, Internet, Whatever   |
+        +------------------+--+---+--------------+
+                           |  |  |
+        +------------------v--v--v---------------+
         |                                        |
-        |          Beryllium Nitrate             |
+        |             Beryllium Nitrate          |
         |                                        |
-        +-----------------+--+---+---------------+
-                          ^  ^   ^
-                          |  |   |
-       +------------------+  |   +-------------+
-       |                     |                 |
+        +------------------^--^--^---------------+
+                           |  |  |
+        +------------------+--+--+---------------+
+        |    NAT, Firewall, Internet, Whatever   |
+        +------------------^--^--^---------------+
+                           |  |  |
+       +-------------------+  |  +-------------+
+       |                      |                |
  +-----+----+       +--------+--+       +------+-------+
  |Iron Oxide|       | Iron Oxide|       | Iron Fluoride|
- |on Node 00|    +--> on Node 01+--+    | on Node 02   +--+
- +-----+----+    |  +-----------+  |    +----^---------+  |
-       |         |                 |         |            |
-       |         |  +------------+ |         |            |
-       |         +--+127.0.0.1:22<-+         |            |
+ |on Node 00|    +->| on Node 01|---+   | on Node 02   |--+
+ +-----+----+    |  +-----------+   |   +----^---------+  |
+       |         |                  |        |            |
+       |         |  +------------+  |        |            |
+       |         +--|127.0.0.1:22|<-+        |            |
        |            +------------+     +-----+---------+  |
-       |                               | /dev/ttyUSB01 <--+
+       |                               | /dev/ttyUSB01 |<-+
  +-----v----------+                    +---------------+
  | example.com:80 |
  +----------------+
-
 ```
 
 ### REAL LIFE USE CASE
@@ -74,20 +80,24 @@ connections).
 
 ### HOW TO RUN
 
-0. Configure `datasource` in `application.yml` in Beryllium Nitrate (db name, user and password).
+0. Configure `datasource` in [application.yml](./beryllium_nitrate/src/main/resources/application.yml) in Beryllium
+   Nitrate (db name, user and password).
 1. Run Beryllium Nitrate on a publicly accessible server, by default it uses ports 7504 and 7501. Take note of Beryllium
-   Nitrate's ip address or assign a domain to it. Ports can be configured in berylliumNitrate.json.
-2. Configure Iron Oxide on a remote machine, to connect to Beryllium Nitrates host, configure it in ironOxide.json.
+   Nitrate's ip address or assign a domain to it. Ports can be configured in
+   [berylliumNitrate.json](./beryllium_nitrate/src/main/resources/berylliumNitrate.json)
+2. Configure Iron Oxide on a remote machine, to connect to Beryllium Nitrates host, configure it in
+   [ironOxide.json](./iron_oxide/src/main/resources/ironOxide.json).
 3. Configure the username and password (like `user:pass`) in ironOxide.json.
-4. Configure the host and username and password, same as step 2 and 3 but for Iron Fluoride (in ironFluoride.json).
+4. Configure the host and username and password, same as step 2 and 3 but for Iron Fluoride (in
+   [ironFluoride.json](./iron_fluoride/src/main/resources/ironFluoride.json)).
 5. Use the [make_user.sh](./x_scripts/make_user.sh) **on Beryllium Nitrate host** to add the `user:pass` you just used
-   to database.
-6. Use the same script to create another user:pass for Copper Carbonate
+   in steps 3 and 4 to database.
+6. Use the same script to create another user:pass for Copper Carbonate, again, *on Beryllium Nitrate* host.
 7. Use the script [perm_permit.sh](./x_scripts/perm_permit.sh) on Beryllium Nitrate host to allow access to the created
    Iron Oxide client to Copper Carbonate client.
 8. Launch Copper Carbonate on your local machine.
-9. On the right boxes, enter the user:pass you created in step 6.
-10. enter Beryllium Nitrate host and port on the right boxes.
+9. On the right boxes in the UI, enter the user:pass you created in step 6.
+10. enter Beryllium Nitrate host and port on the right boxes in the UI.
 11. On left, select you want to connect to Serial port or TCP endpoint, and if TCP, choose which host and port you want
     to connect to.
 12. Select how you want to locally use Copper Carbonate, over COM port (if yes, configure the port on the second tab) or
