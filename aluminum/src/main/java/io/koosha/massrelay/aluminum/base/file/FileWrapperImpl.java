@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+@SuppressWarnings("ClassCanBeRecord")
 final class FileWrapperImpl implements FileWrapper {
 
     private static final Logger log = LoggerFactory.getLogger(FileWrapperImpl.class);
@@ -34,7 +35,7 @@ final class FileWrapperImpl implements FileWrapper {
     }
 
     @Override
-    public final String read() {
+    public String read() {
         if (this.content != null)
             return this.content;
 
@@ -43,15 +44,14 @@ final class FileWrapperImpl implements FileWrapper {
         try {
             final byte[] bytes = Files.readAllBytes(Paths.get(this.location));
             return new String(bytes, StandardCharsets.UTF_8);
-        }
-        catch (final IOException e) {
+        } catch (final IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
 
     @Override
-    public final void write(final String content) {
+    public void write(final String content) {
         assertLocation();
 
         if (this.readonly())
@@ -65,21 +65,20 @@ final class FileWrapperImpl implements FileWrapper {
                 log.error("could not create backup file: {}", bkName);
                 return;
             }
-            Files.write(bkFile.toPath(), this.read().getBytes(StandardCharsets.UTF_8));
-            Files.write(Paths.get(this.location), content.getBytes(StandardCharsets.UTF_8));
-        }
-        catch (final IOException e) {
+            Files.writeString(bkFile.toPath(), this.read());
+            Files.writeString(Paths.get(this.location), content);
+        } catch (final IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
     @Override
-    public final boolean readonly() {
+    public boolean readonly() {
         return this.readonly;
     }
 
     @Override
-    public final boolean readable() {
+    public boolean readable() {
         final File fl = new File(this.location);
         if (!fl.exists() || !fl.canRead())
             return false;
@@ -87,8 +86,7 @@ final class FileWrapperImpl implements FileWrapper {
         try {
             Files.readAllBytes(Paths.get(this.location));
             return true;
-        }
-        catch (final IOException e) {
+        } catch (final IOException e) {
             return false;
         }
     }

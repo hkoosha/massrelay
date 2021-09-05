@@ -24,6 +24,7 @@ import static com.fazecast.jSerialComm.SerialPort.ONE_STOP_BIT;
 import static com.fazecast.jSerialComm.SerialPort.SPACE_PARITY;
 import static com.fazecast.jSerialComm.SerialPort.TWO_STOP_BITS;
 
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class SerialKonfFazecast {
 
     private final String path;
@@ -71,58 +72,48 @@ public final class SerialKonfFazecast {
             throw new IllegalArgumentException("invalid baud rate: " + serialKonf.getBaudRate());
 
         return new SerialKonfFazecast(serialKonf.getPath(),
-            toFazecastStopBits(serialKonf.getStopBits()),
-            toFazecastParity(serialKonf.getParity()),
-            serialKonf.getBaudRate(),
-            serialKonf.getDataBits(),
-            serialKonf.getTimeout(),
-            toFazecastFlowControl(serialKonf.getFlowControl()),
-            serialKonf.isEnabled(),
-            serialKonf.isDump(),
-            serialKonf.isStacktrace(),
-            serialKonf.getIndex());
+                toFazecastStopBits(serialKonf.getStopBits()),
+                toFazecastParity(serialKonf.getParity()),
+                serialKonf.getBaudRate(),
+                serialKonf.getDataBits(),
+                serialKonf.getTimeout(),
+                toFazecastFlowControl(serialKonf.getFlowControl()),
+                serialKonf.isEnabled(),
+                serialKonf.isDump(),
+                serialKonf.isStacktrace(),
+                serialKonf.getIndex());
     }
 
     public static SerialKonfFazecast valueOf(final SerialPort port) {
         return SerialKonfFazecast.builder()
-                                 .path(port.getSystemPortName())
-                                 .stopBits(port.getNumStopBits())
-                                 .parity(port.getParity())
-                                 .baudRate(port.getBaudRate())
-                                 .dataBits(port.getNumDataBits())
-                                 .timeout(port.getReadTimeout())
-                                 .flowControl(port.getFlowControlSettings())
-                                 .build();
+                .path(port.getSystemPortName())
+                .stopBits(port.getNumStopBits())
+                .parity(port.getParity())
+                .baudRate(port.getBaudRate())
+                .dataBits(port.getNumDataBits())
+                .timeout(port.getReadTimeout())
+                .flowControl(port.getFlowControlSettings())
+                .build();
     }
 
     public static String toSerialKonfParity(final int fazecastParity) {
-        switch (fazecastParity) {
-            case NO_PARITY:
-                return SerialKonf.PARITY_NONE;
-            case EVEN_PARITY:
-                return SerialKonf.PARITY_EVEN;
-            case ODD_PARITY:
-                return SerialKonf.PARITY_ODD;
-            case MARK_PARITY:
-                return SerialKonf.PARITY_MARK;
-            case SPACE_PARITY:
-                return SerialKonf.PARITY_SPACE;
-            default:
-                throw new IllegalArgumentException("invalid fazecast parity: " + fazecastParity);
-        }
+        return switch (fazecastParity) {
+            case NO_PARITY -> SerialKonf.PARITY_NONE;
+            case EVEN_PARITY -> SerialKonf.PARITY_EVEN;
+            case ODD_PARITY -> SerialKonf.PARITY_ODD;
+            case MARK_PARITY -> SerialKonf.PARITY_MARK;
+            case SPACE_PARITY -> SerialKonf.PARITY_SPACE;
+            default -> throw new IllegalArgumentException("invalid fazecast parity: " + fazecastParity);
+        };
     }
 
     public static String toSerialKonfStopBits(final int fazecastStopBits) {
-        switch (fazecastStopBits) {
-            case ONE_POINT_FIVE_STOP_BITS:
-                return SerialKonf.STOP_BITS_1_5;
-            case ONE_STOP_BIT:
-                return SerialKonf.STOP_BITS_1;
-            case TWO_STOP_BITS:
-                return SerialKonf.STOP_BITS_2;
-            default:
-                throw new IllegalArgumentException("invalid fazecast stop bits: " + fazecastStopBits);
-        }
+        return switch (fazecastStopBits) {
+            case ONE_POINT_FIVE_STOP_BITS -> SerialKonf.STOP_BITS_1_5;
+            case ONE_STOP_BIT -> SerialKonf.STOP_BITS_1;
+            case TWO_STOP_BITS -> SerialKonf.STOP_BITS_2;
+            default -> throw new IllegalArgumentException("invalid fazecast stop bits: " + fazecastStopBits);
+        };
     }
 
     public static Set<String> toSerialKonfFlowControl(final int fazecastFlowControl) {
@@ -154,33 +145,23 @@ public final class SerialKonfFazecast {
     }
 
     public static int toFazecastParity(final String serialKonfParity) {
-        switch (serialKonfParity) {
-            case SerialKonf.PARITY_NONE:
-                return NO_PARITY;
-            case SerialKonf.PARITY_ODD:
-                return ODD_PARITY;
-            case SerialKonf.PARITY_EVEN:
-                return EVEN_PARITY;
-            case SerialKonf.PARITY_MARK:
-                return MARK_PARITY;
-            case SerialKonf.PARITY_SPACE:
-                return SPACE_PARITY;
-            default:
-                throw new IllegalArgumentException("invalid SerialKonf parity: " + serialKonfParity);
-        }
+        return switch (serialKonfParity) {
+            case SerialKonf.PARITY_NONE -> NO_PARITY;
+            case SerialKonf.PARITY_ODD -> ODD_PARITY;
+            case SerialKonf.PARITY_EVEN -> EVEN_PARITY;
+            case SerialKonf.PARITY_MARK -> MARK_PARITY;
+            case SerialKonf.PARITY_SPACE -> SPACE_PARITY;
+            default -> throw new IllegalArgumentException("invalid SerialKonf parity: " + serialKonfParity);
+        };
     }
 
     public static int toFazecastStopBits(final String serialKonfStopBits) {
-        switch (serialKonfStopBits) {
-            case SerialKonf.STOP_BITS_1_5:
-                return ONE_POINT_FIVE_STOP_BITS;
-            case SerialKonf.STOP_BITS_1:
-                return ONE_STOP_BIT;
-            case SerialKonf.STOP_BITS_2:
-                return TWO_STOP_BITS;
-            default:
-                throw new IllegalArgumentException("invalid SerialKonf stop bits: " + serialKonfStopBits);
-        }
+        return switch (serialKonfStopBits) {
+            case SerialKonf.STOP_BITS_1_5 -> ONE_POINT_FIVE_STOP_BITS;
+            case SerialKonf.STOP_BITS_1 -> ONE_STOP_BIT;
+            case SerialKonf.STOP_BITS_2 -> TWO_STOP_BITS;
+            default -> throw new IllegalArgumentException("invalid SerialKonf stop bits: " + serialKonfStopBits);
+        };
     }
 
     public static int toFazecastFlowControl(final Collection<String> serialKonfFlowControl) {
@@ -216,16 +197,16 @@ public final class SerialKonfFazecast {
 
     public SerialKonf toSerialKonf() {
         return new SerialKonf(path,
-            toSerialKonfStopBits(this.stopBits),
-            toSerialKonfParity(this.parity),
-            this.baudRate,
-            this.dataBits,
-            this.timeout,
-            toSerialKonfFlowControl(this.flowControl),
-            this.enabled,
-            this.dump,
-            this.stacktrace,
-            this.index);
+                toSerialKonfStopBits(this.stopBits),
+                toSerialKonfParity(this.parity),
+                this.baudRate,
+                this.dataBits,
+                this.timeout,
+                toSerialKonfFlowControl(this.flowControl),
+                this.enabled,
+                this.dump,
+                this.stacktrace,
+                this.index);
     }
 
     public String getPath() {
@@ -275,9 +256,8 @@ public final class SerialKonfFazecast {
     public boolean equals(final Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof SerialKonfFazecast))
+        if (!(o instanceof final SerialKonfFazecast other))
             return false;
-        final SerialKonfFazecast other = (SerialKonfFazecast) o;
         if (!Objects.equals(this.getPath(), other.getPath()))
             return false;
         if (this.getStopBits() != other.getStopBits())
@@ -319,16 +299,16 @@ public final class SerialKonfFazecast {
 
     public String toString() {
         return "SerialKonfFazecast(path=" + this.getPath() +
-            ", stopBits=" + this.getStopBits() +
-            ", parity=" + this.getParity() +
-            ", baudRate=" + this.getBaudRate() +
-            ", dataBits=" + this.getDataBits() +
-            ", timeout=" + this.getTimeout() +
-            ", flowControl=" + this.getFlowControl() +
-            ", enabled=" + this.isEnabled() +
-            ", dump=" + this.isDump() +
-            ", stacktrace=" + this.isStacktrace() +
-            ", index=" + this.getIndex() + ")";
+                ", stopBits=" + this.getStopBits() +
+                ", parity=" + this.getParity() +
+                ", baudRate=" + this.getBaudRate() +
+                ", dataBits=" + this.getDataBits() +
+                ", timeout=" + this.getTimeout() +
+                ", flowControl=" + this.getFlowControl() +
+                ", enabled=" + this.isEnabled() +
+                ", dump=" + this.isDump() +
+                ", stacktrace=" + this.isStacktrace() +
+                ", index=" + this.getIndex() + ")";
     }
 
 
@@ -409,7 +389,7 @@ public final class SerialKonfFazecast {
 
         public SerialKonfFazecast build() {
             return new SerialKonfFazecast(path, stopBits, parity, baudRate, dataBits,
-                timeout, flowControl, enabled, dump, stacktrace, index);
+                    timeout, flowControl, enabled, dump, stacktrace, index);
         }
     }
 

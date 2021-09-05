@@ -1,11 +1,9 @@
 package io.koosha.massrelay.aluminum.base.fazecast;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class SerialKonf {
 
     public static final String PARITY_NONE = "NONE";
@@ -34,17 +32,13 @@ public final class SerialKonf {
     public static final String FLOW_XONXOFF_IN = "XONXOFF_IN";
     public static final String FLOW_XONXOFF_OUT = "XONXOFF_OUT";
 
-    public static final Set<String> PARITY = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-        PARITY_NONE, PARITY_EVEN, PARITY_ODD, PARITY_MARK, PARITY_SPACE)));
+    public static final Set<String> PARITY = Set.of(PARITY_NONE, PARITY_EVEN, PARITY_ODD, PARITY_MARK, PARITY_SPACE);
 
-    public static final Set<String> STOP_BITS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-        "1.5", "1", "2")));
+    public static final Set<String> STOP_BITS = Set.of("1.5", "1", "2");
 
-    public static final Set<Integer> DATA_BITS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-        DATA_BITS_5, DATA_BITS_6, DATA_BITS_7, DATA_BITS_8, DATA_BITS_9)));
+    public static final Set<Integer> DATA_BITS = Set.of(DATA_BITS_5, DATA_BITS_6, DATA_BITS_7, DATA_BITS_8, DATA_BITS_9);
 
-    public static final Set<String> FLOW_CONTROL = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-        FLOW_RTS, FLOW_CTS, FLOW_DSR, FLOW_DTR, FLOW_XONXOFF_IN, FLOW_XONXOFF_OUT)));
+    public static final Set<String> FLOW_CONTROL = Set.of(FLOW_RTS, FLOW_CTS, FLOW_DSR, FLOW_DTR, FLOW_XONXOFF_IN, FLOW_XONXOFF_OUT);
 
     // -------------------------------------------------------------------------
 
@@ -79,7 +73,7 @@ public final class SerialKonf {
         this.baudRate = baudRate;
         this.dataBits = dataBits;
         this.timeout = timeout;
-        this.flowControl = Collections.unmodifiableSet(new HashSet<>(flowControl));
+        this.flowControl = Set.copyOf(flowControl);
         this.enabled = enabled;
         this.dump = dump;
         this.stacktrace = stacktrace;
@@ -154,9 +148,8 @@ public final class SerialKonf {
     public boolean equals(final Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof SerialKonf))
+        if (!(o instanceof final SerialKonf other))
             return false;
-        final SerialKonf other = (SerialKonf) o;
         if (!Objects.equals(this.getPath(), other.getPath()))
             return false;
         if (!Objects.equals(this.getStopBits(), other.getStopBits()))

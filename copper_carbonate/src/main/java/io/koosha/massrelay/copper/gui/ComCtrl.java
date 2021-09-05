@@ -171,7 +171,7 @@ final class ComCtrl {
 
         g.commandCtl.kill("kill com");
         XGuiCtrl.injekt.getComService().disable();
-        ((Action) () -> Platform.runLater(((Action) () -> g.statusLocalCom.setText("Offline"))::exec)).exec();
+        Platform.runLater(((Action) () -> g.statusLocalCom.setText("Offline"))::exec);
     }
 
 }

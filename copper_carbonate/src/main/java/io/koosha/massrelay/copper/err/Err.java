@@ -38,9 +38,8 @@ public final class Err {
     public boolean equals(final Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Err))
+        if (!(o instanceof final Err other))
             return false;
-        final Err other = (Err) o;
         if (this.getTimestamp() != other.getTimestamp())
             return false;
         if (this.getId() != other.getId())

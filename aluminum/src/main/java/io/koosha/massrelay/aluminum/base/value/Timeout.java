@@ -40,9 +40,8 @@ public final class Timeout {
     public boolean equals(final Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Timeout))
+        if (!(o instanceof final Timeout other))
             return false;
-        final Timeout other = (Timeout) o;
         if (this.def != other.def)
             return false;
         if (!Objects.equals(this.general, other.general))

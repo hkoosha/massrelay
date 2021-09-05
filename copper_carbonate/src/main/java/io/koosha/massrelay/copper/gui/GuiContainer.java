@@ -1,6 +1,6 @@
 package io.koosha.massrelay.copper.gui;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-@SuppressFBWarnings(value = "ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD",
-                    justification = "It's a GUI!")
+// @SuppressFBWarnings(value = "ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD",
+//                    justification = "It's a GUI!")
 public class GuiContainer extends Application {
 
     private static XInjekt injekt;

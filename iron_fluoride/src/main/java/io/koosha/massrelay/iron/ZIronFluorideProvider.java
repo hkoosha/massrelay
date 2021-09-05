@@ -36,7 +36,6 @@ import org.springframework.context.annotation.Scope;
 
 import javax.inject.Provider;
 import javax.inject.Singleton;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

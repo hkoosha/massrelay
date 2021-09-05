@@ -1,13 +1,24 @@
-apply plugin: 'application'
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.9'
+}
 
 group "io.koosha.massrelay.copper"
 
 dependencies {
-    implementation "com.fazecast:jSerialComm:$fazecast_version"
-
     implementation project(':aluminum')
+
+    implementation "com.fazecast:jSerialComm:$fazecast_version"
 }
 
 application {
     mainClass = 'io.koosha.massrelay.CopperCarbonateApplication'
+}
+
+javafx {
+    version = "15.0.1"
+    modules = [
+            'javafx.controls',
+            'javafx.fxml',
+    ]
 }

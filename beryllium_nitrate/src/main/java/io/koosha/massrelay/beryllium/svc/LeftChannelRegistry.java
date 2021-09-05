@@ -48,7 +48,7 @@ public final class LeftChannelRegistry {
             final String id = leftChannel.attr(Util.ID).get();
 
             log.info("adding left id={} remote={}, rid={} funcode={}",
-                id, Util.socketAddrInfo(leftChannel.remoteAddress()), rightId, funcode);
+                    id, Util.socketAddrInfo(leftChannel.remoteAddress()), rightId, funcode);
 
             final Entry p = registry.put(id, new Entry(leftChannel, rightId, funcode));
             if (p != null)
@@ -61,8 +61,8 @@ public final class LeftChannelRegistry {
             final Entry entry = registry.remove(leftId);
 
             log.info("removing left: {} - {}",
-                entry,
-                entry == null ? "?" : Util.socketAddrInfo(entry.leftChannel.remoteAddress()));
+                    entry,
+                    entry == null ? "?" : Util.socketAddrInfo(entry.leftChannel.remoteAddress()));
 
             return entry == null || entry.isDead() ? null : entry.leftChannel;
         }
@@ -84,25 +84,16 @@ public final class LeftChannelRegistry {
             final Entry ret = registry.remove(id);
 
             log.info("removing for right id={} remote={}, rid={} funcode={}",
-                id, Util.socketAddrInfo(ret.leftChannel.remoteAddress()), rightId, funcode);
+                    id, Util.socketAddrInfo(ret.leftChannel.remoteAddress()), rightId, funcode);
 
             return ret.isDead() ? null : ret.leftChannel;
         }
     }
 
 
-    private static final class Entry {
-        private final Channel leftChannel;
-        private final String rightId;
-        private final Funcode funcode;
-
-        public Entry(final Channel leftChannel,
-                     final String rightId,
-                     final Funcode funcode) {
-            this.leftChannel = leftChannel;
-            this.rightId = rightId;
-            this.funcode = funcode;
-        }
+    private record Entry(Channel leftChannel,
+                         String rightId,
+                         Funcode funcode) {
 
         private boolean isDead() {
             return !this.leftChannel.isOpen();

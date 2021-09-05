@@ -28,21 +28,11 @@ public final class EndLogger extends ChannelInboundHandlerAdapter {
     public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
         final String msg = "channel end: " + infoExtractor.apply(ctx.channel());
         switch (this.atLevel) {
-            case ERROR:
-                log.error(msg);
-                break;
-            case WARN:
-                log.warn(msg);
-                break;
-            case INFO:
-                log.info(msg);
-                break;
-            case DEBUG:
-                log.debug(msg);
-                break;
-            case TRACE:
-                log.trace(msg);
-                break;
+            case ERROR -> log.error(msg);
+            case WARN -> log.warn(msg);
+            case INFO -> log.info(msg);
+            case DEBUG -> log.debug(msg);
+            case TRACE -> log.trace(msg);
         }
 
         super.channelInactive(ctx);

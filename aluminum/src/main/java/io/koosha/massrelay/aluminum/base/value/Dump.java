@@ -52,9 +52,8 @@ public final class Dump {
     public boolean equals(final Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Dump))
+        if (!(o instanceof final Dump other))
             return false;
-        final Dump other = (Dump) o;
         if (this.def != other.def)
             return false;
         if (!Objects.equals(this.left, other.left))

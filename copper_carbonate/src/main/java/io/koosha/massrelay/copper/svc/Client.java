@@ -31,9 +31,8 @@ public final class Client {
     public boolean equals(final Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Client))
+        if (!(o instanceof final Client other))
             return false;
-        final Client other = (Client) o;
         return Objects.equals(this.getIdProperty(), other.getIdProperty());
     }
 

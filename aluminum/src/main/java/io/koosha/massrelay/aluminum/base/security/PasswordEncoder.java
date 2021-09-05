@@ -14,7 +14,7 @@ public interface PasswordEncoder {
     }
 
     /**
-     * Encode the raw password. Generally, a good encoding algorithm applies a
+     * Encode the raw password. Generally, a good encoding algorithm applies
      * SHA-1 or greater hash combined with an 8-byte or greater randomly
      * generated salt.
      */

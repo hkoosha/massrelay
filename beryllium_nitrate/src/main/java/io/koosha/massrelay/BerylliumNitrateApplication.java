@@ -4,7 +4,6 @@ import io.koosha.massrelay.aluminum.base.StopManager;
 import io.koosha.massrelay.beryllium.BerylliumAppRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import static io.koosha.massrelay.aluminum.base.Util.delayedAction;

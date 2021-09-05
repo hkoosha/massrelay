@@ -6,8 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.eventbus.EventBus;
-import io.koosha.massrelay.copper.err.Rrr;
 import io.koosha.massrelay.copper.Names;
+import io.koosha.massrelay.copper.err.Rrr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,6 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -71,7 +70,7 @@ public final class PrefClientService implements ClientService {
 
     @Override
     public synchronized Set<Client> getAll() {
-        return Collections.unmodifiableSet(new HashSet<>(decode()));
+        return Set.copyOf(decode());
     }
 
     @Override
@@ -117,8 +116,7 @@ public final class PrefClientService implements ClientService {
 
 
     static Set<Client> decode0(final String string) throws IOException {
-        final TypeReference<Set<String>> type = new TypeReference<Set<String>>() {
-        };
+        final TypeReference<Set<String>> type = new TypeReference<>() {};
         final ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         return om.readValue(string, type)

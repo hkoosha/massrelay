@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.security.SecureRandom;
 import java.util.regex.Pattern;
 
-
 /**
  * Implementation of PasswordEncoder that uses the BCrypt strong hashing
  * function. Clients can optionally supply a "strength" (a.k.a. log rounds in

@@ -50,7 +50,7 @@ public final class Util {
                     + ": "
                     + cause.getMessage()
                     + " -> \n"
-                    + sw.toString();
+                    + sw;
             }
             else if (cause.getMessage().isEmpty()) {
                 return cause.getClass().getSimpleName();
@@ -65,7 +65,7 @@ public final class Util {
     }
 
     public static ChannelInitializer<Channel> init(final Consumer<Channel> c) {
-        return new ChannelInitializer<Channel>() {
+        return new ChannelInitializer<>() {
             @Override
             protected void initChannel(final Channel ch) {
                 c.accept(ch);
@@ -77,8 +77,7 @@ public final class Util {
         if (sa == null)
             return "?";
 
-        if (sa instanceof InetSocketAddress) {
-            final InetSocketAddress sar = (InetSocketAddress) sa;
+        if (sa instanceof final InetSocketAddress sar) {
             final String h = sar.getHostString();
             final int p = sar.getPort();
             return h + ':' + p;

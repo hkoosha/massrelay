@@ -52,7 +52,7 @@ final class CommandCtrl {
         this.loginPref = XGuiCtrl.injekt.getLoginPref();
         this.settings = XGuiCtrl.injekt.getSettings();
 
-        ((Action) () -> Platform.runLater(((Action) () -> doAllOfE(
+        Platform.runLater(((Action) () -> doAllOfE(
             "CommandCtrl::<init>",
             () -> g.tfLogin.setText(loginPref.get(P_LOGIN, "")),
             () -> g.tfPassword.setText(loginPref.get(P_SECRET, "")),
@@ -60,7 +60,7 @@ final class CommandCtrl {
             () -> g.tfTargetPort.setText(settings.get(P_TCP_TARGET_PORT, "")),
             () -> g.tfRemote.setText(settings.get(P_REMOTE_DOMAIN, "")),
             () -> g.tfRemotePort.setText(settings.get(P_REMOTE_PORT, ""))
-        ))::exec)).exec();
+        ))::exec);
 
         g.cmdTCP.setUserData(Funcodes.TCP);
         g.cmdCOM.setUserData(Funcodes.SERIAL);
@@ -121,43 +121,31 @@ final class CommandCtrl {
     @Subscribe
     void published(final Event event) {
         switch (event) {
-            case RIGHT_CONNECTING:
+            case RIGHT_CONNECTING -> {
                 disable();
                 updateServer("Dialing...");
-                break;
-            case RIGHT_AUTHENTICATING:
+            }
+            case RIGHT_AUTHENTICATING -> {
                 disable();
                 updateServer("Saying hello...");
-                break;
-            case RIGHT_CONNECTED:
+            }
+            case RIGHT_CONNECTED -> {
                 disable();
                 updateServer("Online");
                 updateLine("Waiting...");
-                break;
-            case KILLED:
-            case RIGHT_DISCONNECTED:
+            }
+            case KILLED, RIGHT_DISCONNECTED -> {
                 updateLine("Offline");
                 updateServer("Offline");
                 enable();
-                break;
-
-            case LINE_CONNECTED:
-                updateLine("Online");
-                break;
-            case LINE_DISCONNECTED:
-                updateLine("Offline");
-                break;
-
-            case LEFT_CONNECTED:
-                updateLeft("Online");
-                break;
-            case LEFT_DISCONNECT:
-                updateLeft("Offline");
-                break;
-
-            default:
-                // To make spotbugs happy :|
-                break;
+            }
+            case LINE_CONNECTED -> updateLine("Online");
+            case LINE_DISCONNECTED -> updateLine("Offline");
+            case LEFT_CONNECTED -> updateLeft("Online");
+            case LEFT_DISCONNECT -> updateLeft("Offline");
+            default -> {
+            }
+            // To make spotbugs happy :|
         }
     }
 
@@ -293,29 +281,29 @@ final class CommandCtrl {
     }
 
     private void updateLine(final String text) {
-        ((Action) () -> Platform.runLater(((Action) () -> g.statusConnection.setText(text))::exec)).exec();
+        Platform.runLater(((Action) () -> g.statusConnection.setText(text))::exec);
     }
 
     // ==================
 
     private void updateLeft(final String text) {
-        ((Action) () -> Platform.runLater(((Action) () -> g.statusLocalSocket.setText(text))::exec)).exec();
+        Platform.runLater(((Action) () -> g.statusLocalSocket.setText(text))::exec);
     }
 
     private void updateServer(final String text) {
-        ((Action) () -> Platform.runLater(((Action) () -> g.statusServer.setText(text))::exec)).exec();
+        Platform.runLater(((Action) () -> g.statusServer.setText(text))::exec);
     }
 
     private void updateEndPoint(final String text) {
-        ((Action) () -> Platform.runLater(((Action) () -> g.statusEndPoint.setText(text))::exec)).exec();
+        Platform.runLater(((Action) () -> g.statusEndPoint.setText(text))::exec);
     }
 
     private void disable() {
-        ((Action) () -> Platform.runLater(((Action) () -> disEn(g.disableable(), true))::exec)).exec();
+        Platform.runLater(((Action) () -> disEn(g.disableable(), true))::exec);
     }
 
     private void enable() {
-        ((Action) () -> Platform.runLater(((Action) () -> disEn(g.disableable(), false))::exec)).exec();
+        Platform.runLater(((Action) () -> disEn(g.disableable(), false))::exec);
     }
 
 }

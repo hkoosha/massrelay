@@ -64,15 +64,10 @@ public final class ServerDialerService {
     @Subscribe
     void published(final Event event) {
         switch (event) {
-            case LINE_DISCONNECTED:
-            case RIGHT_DISCONNECTED:
-            case KILLED:
-                taskGuard.stop();
-                break;
-
-            default:
-                // To make spotbugs happy :|
-                break;
+            case LINE_DISCONNECTED, RIGHT_DISCONNECTED, KILLED -> taskGuard.stop();
+            default -> {
+            }
+            // To make spotbugs happy :|
         }
     }
 

@@ -1,10 +1,12 @@
 .PHONY: build
 build: clean
-	./gradlew build -xdistZip -xdistTar -xspotbugsMain
+	./gradlew build -xdistZip -xdistTar 
+	#-xspotbugsMain
 
 .PHONY: dirty-build
 dirty-build: 
-	./gradlew build -xdistZip -xdistTar -xspotbugsMain
+	./gradlew build -xdistZip -xdistTar 
+	# -xspotbugsMain
 
 .PHONY: bugs
 bugs:
@@ -12,7 +14,8 @@ bugs:
 
 .PHONY: dist
 dist: build
-	./gradlew distTar -xdistZip -xspotbugsMain
+	./gradlew distTar -xdistZip 
+	# -xspotbugsMain
 
 .PHONY: clean
 clean:

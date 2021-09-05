@@ -38,9 +38,8 @@ public final class Secret {
     public boolean equals(final Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Secret))
+        if (!(o instanceof final Secret other))
             return false;
-        final Secret other = (Secret) o;
         if (!Objects.equals(this.getId(), other.getId()))
             return false;
         return Objects.equals(this.getHash(), other.getHash());

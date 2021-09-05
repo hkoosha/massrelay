@@ -1,21 +1,21 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.6.0"
-    }
-}
+//buildscript {
+//    repositories {
+//        maven {
+//            url "https://plugins.gradle.org/m2/"
+//        }
+//    }
+//    dependencies {
+//        classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.3"
+//    }
+//}
 
 ext {
-    spring_version = '2.4.1'
-    hibernate_version = '5.4.26.Final'
+    spring_version = '2.5.4'
+    hibernate_version = '5.5.7.Final'
     jaxb_version = '2.3.1'
-    mysql_version = '8.0.22'
-    fazecast_version = '2.6.2'
-    jcommander_version = '1.78'
+    mysql_version = '8.0.26'
+    fazecast_version = '2.7.0'
+    jcommander_version = '1.81'
 }
 
 subprojects {
@@ -23,15 +23,14 @@ subprojects {
     apply plugin: 'idea'
     apply plugin: 'distribution'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
 
-    version '0.1'
+    version '0.2'
 
     repositories {
         // mavenLocal()
         mavenCentral()
-        // jcenter()
     }
 
     idea {
@@ -48,19 +47,28 @@ subprojects {
     }
 }
 
-subprojects {
-    apply plugin: 'com.github.spotbugs'
-
-    spotbugs {
-        showProgress = true
-        effort = 'max'
-        maxHeapSize = '1024m'
-    }
-
-    dependencies {
-        compileOnly 'com.google.code.findbugs:annotations:3.0.1'
-    }
-}
+// subprojects {
+//     apply plugin: 'com.github.spotbugs'
+// 
+//     spotbugs {
+//         showProgress = true
+//         // effort = 'max'
+//         maxHeapSize = '1024m'
+//     }
+// 
+//     gradle.taskGraph.beforeTask { task ->
+//         if (task.name.toLowerCase().contains('spotbugs')) {
+//             task.reports {
+//                 html.enabled = true
+//                 xml.enabled = false
+//             }
+//         }
+//     }
+// 
+//     dependencies {
+//         compileOnly 'com.google.code.findbugs:annotations:3.0.1'
+//     }
+// }
 
 subprojects {
     dependencies {
@@ -69,16 +77,16 @@ subprojects {
         compileOnly "org.springframework.boot:spring-boot-configuration-processor:$spring_version"
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:$spring_version"
 
-        implementation 'org.slf4j:slf4j-api:1.7.30'
-        implementation 'org.slf4j:jcl-over-slf4j:1.7.30'
-        implementation 'ch.qos.logback:logback-classic:1.2.3'
+        implementation 'org.slf4j:slf4j-api:1.7.32'
+        implementation 'org.slf4j:jcl-over-slf4j:1.7.32'
+        implementation 'ch.qos.logback:logback-classic:1.2.5'
         implementation 'javax.inject:javax.inject:1'
 
-        implementation 'com.fasterxml.jackson.core:jackson-core:2.12.0'
-        implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.0'
-        implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.0'
-        implementation 'com.google.guava:guava:30.1-jre'
-        implementation 'io.netty:netty-all:4.1.56.Final'
+        implementation 'com.fasterxml.jackson.core:jackson-core:2.12.5'
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+        implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.5'
+        implementation 'com.google.guava:guava:30.1.1-jre'
+        implementation 'io.netty:netty-all:4.1.67.Final'
 
         implementation 'io.koosha.konfigurations:konfigurations:9.0.0'
         implementation 'io.koosha.nettyfunctional:nettyfunctional:1.0.0'
