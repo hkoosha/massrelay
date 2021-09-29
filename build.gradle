@@ -10,7 +10,7 @@
 //}
 
 ext {
-    spring_version = '2.5.4'
+    spring_version = '2.5.5'
     hibernate_version = '5.5.7.Final'
     jaxb_version = '2.3.1'
     mysql_version = '8.0.26'
