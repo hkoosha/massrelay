@@ -15,7 +15,7 @@ ext {
     jaxb_version = '2.3.1'
     mysql_version = '8.0.27'
     fazecast_version = '2.7.0'
-    jcommander_version = '1.81'
+    jcommander_version = '1.82'
 }
 
 subprojects {
